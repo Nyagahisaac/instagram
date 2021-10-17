@@ -11,7 +11,7 @@
 
 
 
-
+  
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,7 +62,49 @@
       </div>
 
 
-    
+      {% for img in image %}
+      <section class="main">
+        <div class="wrapper">
+          <div class="left-col">
+
+            <div class="post">
+              <div class="info">
+                <div class="user">
+                  <div class="profile-pic"><img src="{{img.image.url}}" alt=""></div>
+                  <p class="username">{{img.name}}</p>
+                </div>
+
+              </div>
+  
+              <img src="{{img.image.url}}" class="post-image" alt="">
+              <div class="post-content">
+                <div class="reaction-wrapper">
+                  <span class="icons" style="padding-right: 25px;"> <a href="#"> <i
+                        class="far fa-heart"></i></i></a></span>
+                  <span class="icons" style="padding-right: 25px;"> <a href="#"> <i
+                        class="far fa-comment"></i></a></span>
+                  <i class="far fa-paper-plane"></i>
+                </div>
+                <p class="likes">{{img.likes}}</p>
+                <p class="description"><span> </span> </p>
+                <p class="post-time">{{img.post_date}}</p>
+              </div>
+              <a href="">
+                <div class="comment-wrapper">
+                  <i class="fa fa-smile-o" style="font-size:24px; padding-left: 10px;" ></i>
+                  <input type="text" class="comment-box" placeholder="Add a comment">
+                  <button class="comment-btn">post</button>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      {% empty %}
+      <p>There are no posts yet</p>
+      {% endfor %}
+
+
     </div>
 
     <div class="col-md-3"></div>
