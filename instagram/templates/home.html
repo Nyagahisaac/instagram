@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <title>Instagram <span><i class="fa fa-instagram" aria-hidden="true"></i></span></title>
+</head>
+
+<body>
+  {% include "navbar.html" %}
+
+  {% block content %}
+  <center>
+  <div class="row" style="margin-top: 100px;">
+    <div class="col-md-3"></div>
+    <div class="row col-md-6">
+
+      <!-- status -->
+      <div>
+        <section class="mains">
+          <div class="wrapper">
+            <div class="left-col">
+              <div class="status-wrapper">
+                <div class="status-card">
+                  <div class="profile-pic"><img src="https://i.pinimg.com/474x/c9/72/99/c9729987795f88b227b8f632498b531a.jpg" alt=""></div>
+                  <p class="username">Heistings</p>
+                </div>
+                <div class="status-card">
+                  <div class="profile-pic"><img src="https://i.pinimg.com/474x/bf/93/c1/bf93c1c154622b7ef1ad22e5fef6644c.jpg" alt=""></div>
+                  <p class="username">Duke</p>
+                </div>
+                <div class="status-card">
+                  <div class="profile-pic"><img src="https://i.pinimg.com/474x/70/a6/4b/70a64bd0c0c62491f206fef910f20160.jpg" alt=""></div>
+                  <p class="username">Reddington</p>
+                </div>
+                <div class="status-card">
+                  <div class="profile-pic"><img src="" alt=""></div>
+                  <p class="username">Nyagah </p>
+                </div>
+                <div class="status-card">
+                  <div class="profile-pic"><img src="https://i.pinimg.com/474x/ef/c3/6f/efc36f46cd4b8fefd94161fdcc6fe68f.jpg" alt=""></div>
+                  <p class="username">Katoto</p>
+                </div>
+
+              </div>
+            </div>
+        </section>
+      </div>
+
+
+      {% for img in image %}
+      <section class="main">
+        <div class="wrapper">
+          <div class="left-col">
+
+            <div class="post">
+              <div class="info">
+                <div class="user">
+                  <div class="profile-pic"><img src="{{img.image.url}}" alt=""></div>
+                  <p class="username">{{img.name}}</p>
+                </div>
+
+              </div>
+  
+              <img src="{{img.image.url}}" class="post-image" alt="">
+              <div class="post-content">
+                <div class="reaction-wrapper">
+                  <span class="icons" style="padding-right: 25px;"> <a href="#"> <i
+                        class="far fa-heart"></i></i></a></span>
+                  <span class="icons" style="padding-right: 25px;"> <a href="#"> <i
+                        class="far fa-comment"></i></a></span>
+                  <i class="far fa-paper-plane"></i>
+                </div>
+                <p class="likes">{{img.likes}}</p>
+                <p class="description"><span> </span> </p>
+                <p class="post-time">{{img.post_date}}</p>
+              </div>
+              <a href="">
+                <div class="comment-wrapper">
+                  <i class="fa fa-smile-o" style="font-size:24px; padding-left: 10px;" ></i>
+                  <input type="text" class="comment-box" placeholder="Add a comment">
+                  <button class="comment-btn">post</button>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      {% empty %}
+      <p>There are no posts yet</p>
+      {% endfor %}
+
+
+    </div>
+
+    <div class="col-md-3"></div>
+  </div>
+  </div>
+  </center>
+  {% endblock %}
+</body>
+
+</html>
