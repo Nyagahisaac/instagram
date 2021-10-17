@@ -1,0 +1,60 @@
+{%extends 'base.html'%} 
+{% block content %}
+{% include 'navbar.html' %}
+<div class="container" style="margin-top: 110px;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="text-center">
+            {% if results%}
+            <h2>Found {{results|length }} of searched term {{message}}</h2>
+            {% else %}
+            <h2> Found 0 post name for the search term {{message}}</h2>
+            {% endif %}
+        </div>
+
+        <div class="row">
+
+            {% if results %}
+              {% for post in results %}
+              <section class="main">
+                  <div class="wrapper">
+                      <div class="left-col">
+              
+                          <div class="post">
+                              <div class="info">
+                                  <div class="user">
+                                      <div class="profile-pic"><img src="{{post.image_path.url}}" alt=""></div>
+                                      <p class="username">{{post.user.username}}</p>
+                                  </div>
+                              
+                              </div>
+                              <img src="{{post.image_path.url}}" class="post-image" alt="">
+                              <div class="post-content">
+                                  <div class="reaction-wrapper">
+                                      <span class="icons" > <a href=""> <i class="far fa-heart"></i></i></a></span>
+                                      <span class="icons" > <a href="{%url 'new_comment'%}"> <i class="far fa-comment"></i></a> </span>
+                                      <i class="far fa-paper-plane"></i>
+                                  </div>
+                                  <p class="likes">11 likes</p>
+                                  <p class="description"><span>{{post.user.username}} </span> {{post.caption}}</p>
+                                  <p class="post-time">{{post.post_date}}</p>
+                              </div>
+                              <div class="comment-wrapper">
+                                  <i class="fa fa-smile-o" style="font-size:24px" class="icon"></i>
+                                  <input type="text" class="comment-box" placeholder="Add a comment">
+                                  <button class="comment-btn">post</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+              {% endfor %}
+            {% endif %}
+            </div>
+
+    </div>
+
+    <div class="col-md-3"></div>
+  
+</div>
+{% endblock %}
