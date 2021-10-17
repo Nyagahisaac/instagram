@@ -1,0 +1,36 @@
+
+
+{%extends 'base.html'%}
+{% load bootstrap5 %} 
+
+ {% block content %}
+ {% include 'navbar.html' %}
+ <div class="container itemz" style="margin-top: 100px;">
+    {{ block.super}}
+        <div class="row">
+            <div class="col-md-4">
+    
+            </div>
+            <div class="col-md-4">
+                {%for comment in comments%}
+                    <p><strong>{{comment.user.username}} </strong><span style="color: rgba(0, 0, 0, 0.5);">{{comment.message}}</span></p>
+                {%endfor%}
+
+                 <div class="card">
+
+                    <form  action="{%url 'new_comment'%}" method="post" enctype="multipart/form-data">
+                        {%csrf_token%}
+    
+                        {% bootstrap_form form%}
+                        <input type="submit" class="btn btn-outline-danger btn-sm" value="Post">
+                    </form>
+                 </div>
+            </div>
+            <div class="col-md-4">
+    
+            </div>
+        </div>
+    
+    </div>
+
+ {% endblock %}
