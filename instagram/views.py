@@ -76,3 +76,20 @@ def new_comment(request):
     else:
         form = NewCommentForm()
     return render(request, 'new-comment.html', {"form": form, "comments": comments})
+
+def search_results(request):
+    title="Find"
+    images=Image.objects.all()
+    
+    
+    if 'image_name' in request.GET and request.GET['image_name']:
+        search_term = request.GET.get('image_name')
+        found_results = Image.objects.filter(name__icontains=search_term)
+        message = f"{search_term}"
+
+
+        return render(request, 'search.html',{'title':title,'results': found_results, 'message': message})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html',{"message":message})
