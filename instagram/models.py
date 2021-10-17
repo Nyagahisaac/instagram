@@ -14,7 +14,7 @@ class Users(models.Model):
     phone_number = models.CharField(max_length=10,blank= True)
 
 class Profile(models.Model):
-    photo = models.ImageField(upload_to='Image/')
+    photo = models.ImageField(upload_to='Profile/')
     boi = models.CharField(max_length=300, blank = True),
     user = models.OneToOneField(User , on_delete=models.CASCADE)
 
@@ -52,7 +52,27 @@ class Image(models.Model):
     def delete_image(self):
         self.delete()
     
- 
+        
+    def get_all_images(cls):
+        images = cls.objects.all()
+        return images
+
+    @classmethod
+    def search_by_name(cls,search_term):
+        names = cls.objects.filter(name__icontains=search_term)
+        return names
+        
+    @classmethod
+    class Meta:
+        ordering = ['-post_date']
+
+    def __str__(self):
+        return self.name
+
+    @classmethod
+    def update_caption(cls, caption):
+        update = cls.objects.filter(id = id).update(caption=caption)
+        update.save()
 
     
 
@@ -68,6 +88,16 @@ class Comment(models.Model):
 
     def add_comment(self):
         self.save()
+
+
+    def get_post_comments(cls, image_id):
+        comments = cls.objects.filter(image_id=image_id)
+        return comments
+
+    @classmethod
+    def get_comments(cls):
+        comments=cls.objects.all()
+        return comments
 
     
 
