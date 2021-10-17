@@ -1,0 +1,3 @@
+Hello {{name}}
+
+Welcome to Instagram Clone App You will find the most exciting experience about this Instagram App
