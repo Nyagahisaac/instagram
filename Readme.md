@@ -14,7 +14,8 @@
     Live site can be accessed from the following link[]
    
 # The App
- <img src="file:///home/isaac/      Screenshot%20from%202021-10-18%2001-06-14.png" alt="">
+ <img src="img/Screenshot.png" alt="">
+ <img src="img/Screenshot 2.png" alt="">
 
 
 

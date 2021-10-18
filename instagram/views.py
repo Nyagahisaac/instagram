@@ -14,14 +14,14 @@ from django.contrib import messages
 # Create your views here.
 User = get_user_model
 
-@login_required()
+@login_required(login_url='/accounts/login/')
 def home (request):
     title = "Instagram Clone"
     image = Image.objects.all()
 
     return render(request, 'home.html',{'image': image})
 
-@login_required()
+@login_required(login_url='/accounts/login')
 def profile(request):
     title = 'My-Profile'
 
@@ -77,6 +77,8 @@ def new_comment(request):
         form = NewCommentForm()
     return render(request, 'new-comment.html', {"form": form, "comments": comments})
 
+
+@login_required(login_url='/accounts/login/')
 def search_results(request):
     title="Find"
     images=Image.objects.all()
