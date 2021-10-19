@@ -1,7 +1,7 @@
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 
-def send_welcome_email(name,receiver):
+def send_register_welcome_email(name,receiver):
     # Creating message subject and sender
     subject = 'Welcome to Isaacs Instagram App'
     sender = 'nyagahisaac@gmail.com'

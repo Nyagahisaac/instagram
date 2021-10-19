@@ -31,20 +31,22 @@
             <div class="body">
                 <ul>
                     <li class="home" style="font-weight: 505; font-size: 15px"><a href="/">{{current_user}}</a></li>
-                    <li class="home" style="font-weight: 505; font-size: 20px"><a href="/">Home</a></li>
-                    <li class="blog  dropdown"><a style="font-weight: 505; font-size: 20px" href="#">Profile</a>
+                    <li class="home" style="font-weight: 505; font-size: 20px"><a href="{%url 'welcome'%}">Home</a></li>
+                    <li class="blog  dropdown"><a style="font-weight: 505; font-size: 20px" href="{%url 'profile'%, user==current_user}"">Profile</a>
                         <span class="selector"></span>
                         <ul style="font-size: 15px">
                             <li><a href="#">My profile</a></li>
                             <li><a href="/accounts/password/change">Change password</a></li>
-                            <li><a href="">Logout</a></li>
+                            <li><a href="#">Logout</a></li>
                         </ul>
                     </li>
                     <li class="page" style="font-weight: 505; font-size: 20px"><a href="/new/post/"><i
                                 class="fa fa-plus-square" aria-hidden="true"></i>
                         </a></li>
-                    <li class="page" style="font-weight: 505; font-size: 20px"><a href=""><i class="fa fa-paper-plane-o"
-                                aria-hidden="true"></i></a>
+                    
+                    <li class="page btn btn-outline-warning btn-rounded btn-md" style="font-weight: 505; font-size: 17px"><a  href="accounts/login">Login</a>
+                    </li>
+                    <li class="page btn btn-outline-warning btn-rounded btn-md" style="font-weight: 505; font-size: 17px"><a  href="accounts/register">Sign Up</a>
                     </li>
                     <li class="more dropdown" id="hov"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
                         <span class="selector"></span>
@@ -74,7 +76,39 @@
     </nav>
     <div id="underlay" class="better-nav-mobile-underlay"></div>
     <nav id="navbar-slide" class="better-nav-pills"></nav>
-
+    <div class="">
+        {% if user.is_authenticated %}
+        <ul>
+          <li class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="far fa-user-circle"></i>
+                      <span class="caret"></span>
+                  </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li>
+                <a href="{%url 'welcome'%}" class="dropdown-item">Home</a>
+              </li>
+              <li>
+                <a href="#" class="dropdown-item">Create Post</a>
+              </li>
+              <li>
+                <a href="{%url 'profile'%, user==current_user}" class="dropdown-item">My Profile</a>
+              </li>
+              <li>
+                <a href="/accounts/password/change" class="dropdown-item">Change Password</a>
+              </li>
+              <li>
+                <a href="accounts/logout" class="dropdown-item">Logout</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        {% else %}
+        <li>
+          <a class='btn btn-default' href="/accounts/login" class="dropdown-item">Login</a>
+        </li>
+  
+        {% endif %}
+      </div>
 </body>
 
 </html>

@@ -2,18 +2,18 @@
 
 * This Instagram app  created as a clone of instagram.Developed during Moringa Core. 
 
-# AUTHOR
-* By: Nyagah Isaac
+## AUTHOR
+* By: Nyagah Isaac 
+* [live link](https://nyagahisaac.github.io/Tracker/)
 
-
-# Description
+## Description
 
 * This web-app allows a user to create a Profile, add Post and allow users add comment that are all under his username allowing other users to vote for them.
-# Setup/Installation Requirements
+## Setup/Installation Requirements
 
     Live site can be accessed from the following link[]
    
-# The App
+## The App
  <img src="img/Screenshot.png" alt="">
  <img src="img/Screenshot 2.png" alt="">
 
@@ -27,7 +27,7 @@
     virtualenv
     Requirements.txt
 
-# Cloning
+## Cloning
 * In your terminal:
 
   * $ git clone https://github.com/Nyagahisaac/instagram.git.
@@ -62,8 +62,8 @@ This project was generated with :~
     PSQL database.
     HTML,CSS
 
-# Known Bugs
-## Support and contact details
+## Known Bugs
+### Support and contact details
 
  Incase of a problem, issue or need more clarification, feel free to send an email : [ nyagahisaac@gmail.com ]
 ## About
@@ -95,5 +95,5 @@ This project was generated with :~
     Other 0.9%
 
 
-# Copyright
- ## @isaac 2021
+## Copyright
+ ### @isaac 2021

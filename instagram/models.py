@@ -11,7 +11,7 @@ class Users(models.Model):
     first_name = models.CharField(max_length= 50)
     last_name = models.CharField(max_length= 50)
     email = models.EmailField()
-    phone_number = models.CharField(max_length=10,blank= True)
+    password = models.CharField(max_length=20,blank= True)
 
 class Profile(models.Model):
     photo = models.ImageField(upload_to='Profile/')

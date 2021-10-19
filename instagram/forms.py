@@ -1,5 +1,8 @@
 from django import forms
+
+from instagram import views
 from .models import Image,Comment, Profile
+# from .views import Signup
 
 class NewImageForm(forms.ModelForm):
     class Meta:
@@ -15,3 +18,8 @@ class NewProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ('user',)
+
+# class SignUpForm(forms.ModelForm):
+#     class Meta:
+#         views = Signup
+#         exclude = ()

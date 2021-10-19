@@ -1,27 +1,75 @@
 from django.http.response import HttpResponse
 from django.shortcuts import  render ,redirect, get_object_or_404
 import datetime as dt
-from django.contrib.auth.decorators import login_required
 from .models import Profile,Image,User
-from django.contrib.auth import authenticate,login,logout,get_user_model
+from django.contrib.auth import get_user_model,login,logout
 from django.contrib.auth.decorators import login_required
-from .emails import send_welcome_email
 from .models import Image,Profile,Comment
-from .forms import NewImageForm, NewCommentForm, NewProfileForm
+from .forms import NewImageForm, NewCommentForm, NewProfileForm 
 from django.contrib import messages
+from .emails import send_register_welcome_email
 
 
 # Create your views here.
 User = get_user_model
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def home (request):
     title = "Instagram Clone"
     image = Image.objects.all()
 
     return render(request, 'home.html',{'image': image})
 
-@login_required(login_url='/accounts/login')
+def register(request):
+    '''
+    this is a view function that is responsible for rendering our register form and funtionality
+    '''
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        confirm_password =request.POST['confirm_password']
+        
+        if confirm_password == password:
+            if User.objects.filter(username = username):
+                messages.info(request,'This username is taken')
+                return redirect('register')
+            else:
+                user = User.objects.create_user(username = username,email = email,password = password,confirm_password = confirm_password)
+                user.save()
+                send_register_welcome_email(username,email)
+                return redirect('home')
+        else:
+            messages.info(request,'passwords should match')
+            return redirect('register')
+        
+    else:
+        return render(request,'registration/registration_form.html')
+    
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')
+# def Signup(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            User.objects.create_user(username=username, email=email, password=password)
+            return redirect('edit-profile')
+    else:
+        form = SignupForm()
+    
+    context = {
+        'form':form,
+    }
+
+    return render(request, 'home.html', context)
+
+
+@login_required
 def profile(request):
     title = 'My-Profile'
 
@@ -42,7 +90,7 @@ def profile(request):
         return render(request, 'profile.html', {'profile': profile, 'title': title, 'form': form})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def new_post(request):
     current_user = request.user
     if request.method == 'POST':
@@ -75,10 +123,10 @@ def new_comment(request):
 
     else:
         form = NewCommentForm()
-    return render(request, 'new-comment.html', {"form": form, "comments": comments})
+    return render(request, 'comments.html', {"form": form, "comments": comments})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def search_results(request):
     title="Find"
     images=Image.objects.all()
