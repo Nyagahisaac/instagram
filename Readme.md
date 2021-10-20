@@ -4,7 +4,7 @@
 
 ## AUTHOR
 * By: Nyagah Isaac 
-* [live link](https://nyagahisaac.github.io/Tracker/)
+* [live link]()
 
 ## Description
 
@@ -30,7 +30,7 @@
 ## Cloning
 * In your terminal:
 
-  * $ git clone https://github.com/Nyagahisaac/instagram.git.
+  * $ git clone (https://github.com/Nyagahisaac/instagram.git.)
   * $ cd Instagram
 
 ## Running the Application

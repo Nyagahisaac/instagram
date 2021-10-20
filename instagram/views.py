@@ -5,15 +5,15 @@ from .models import Profile,Image,User
 from django.contrib.auth import get_user_model,login,logout
 from django.contrib.auth.decorators import login_required
 from .models import Image,Profile,Comment
-from .forms import NewImageForm, NewCommentForm, NewProfileForm 
+from .forms import NewImageForm, NewCommentForm, NewProfileForm, SignupForm 
 from django.contrib import messages
 from .emails import send_register_welcome_email
-
+from django.contrib.auth.models import User
 
 # Create your views here.
 User = get_user_model
 
-@login_required
+@login_required(login_url='/accounts/register/')
 def home (request):
     title = "Instagram Clone"
     image = Image.objects.all()
@@ -50,7 +50,7 @@ def register(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
-# def Signup(request):
+def Signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
@@ -85,8 +85,8 @@ def profile(request):
 
         else:
             form = NewProfileForm()
-        user=current_user
-        profile =Profile.get_profile(user)
+            user=current_user
+            profile =Profile.get_profile(user)
         return render(request, 'profile.html', {'profile': profile, 'title': title, 'form': form})
 
 
@@ -99,8 +99,6 @@ def new_post(request):
             image = form.save(commit=False)
             image.user = current_user
             image.save()
-            # article.post = strip_tags(request.POST['post'])
-            # article.save()
         return redirect('welcome')
 
     else:
@@ -132,9 +130,9 @@ def search_results(request):
     images=Image.objects.all()
     
     
-    if 'image_name' in request.GET and request.GET['image_name']:
-        search_term = request.GET.get('image_name')
-        found_results = Image.objects.filter(name__icontains=search_term)
+    if 'username' in request.GET and request.GET["username"]:
+        search_term = request.GET.get("username")
+        found_results = Image.objects.filter(username__icontains=search_term)
         message = f"{search_term}"
 
 

@@ -1,16 +1,16 @@
 {%extends 'base.html'%}
-{% load bootstrap4 %} 
- {% block content %}
- {% include 'navbar.html' %}
- <div class="container itemz" style="margin-top: 110px;">
+{% load bootstrap4 %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class="container itemz" style="margin-top: 110px;">
     {{ block.super}}
-        <div class="row">
-            <div class="col-md-3">
-    
-            </div>
-            <div class="col-md-6 text-center">
-                {%for profile in profile%}
-                <img src="{{profile.photo.url}}" class="profile-" style="
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6 text-center">
+            {%for profiles in profile%}
+            <img src="{{profile.photo.url}}" class="profile-" style="
                     width: 200px;
                     height: 200px;
                     border-radius: 50%;
@@ -18,27 +18,27 @@
                     padding: 3px;
                     background: linear-gradient(45deg, rgb(255, 230, 0), rgb(255, 0, 128) 80%);
                 " alt="">
-                <p><strong><i>Username</i></strong></p>
-                <h1>{{profile.user.username}}</h1>
-                <p><strong><i>Bio</i></strong></p>
-                <p>'{{profile.bio}}'</p>
-                {%endfor%}
+            <p><strong><i>Username</i></strong></p>
+            <h1>{{profile.user.username}}</h1>
+            <p><strong><i>Bio</i></strong></p>
+            <p>'{{profile.bio}}'</p>
+            {%endfor%}
 
-                 <div class="card">
+            <div class="card">
 
-                    <form  action="{%url 'profile'%}" method="post" enctype="multipart/form-data">
-                        {%csrf_token%}
-    
-                        {% bootstrap_form form%}
-                        <input type="submit" class="btn btn-outline-danger btn-sm" value="Save">
-                    </form>
-                 </div>
-            </div>
-            <div class="col-md-3">
-    
+                <form action="{%url 'profile'%}" method="post" enctype="multipart/form-data">
+                    {%csrf_token%}
+
+                    {% bootstrap_form form%}
+                    <input type="submit" class="btn btn-outline-danger btn-sm" value="Save">
+                </form>
             </div>
         </div>
-    
+        <div class="col-md-3">
+
+        </div>
     </div>
 
- {% endblock %}
+</div>
+
+{% endblock %}

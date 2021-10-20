@@ -35,7 +35,7 @@
                     <li class="blog  dropdown"><a style="font-weight: 505; font-size: 20px" href="{%url 'profile'%, user==current_user}"">Profile</a>
                         <span class="selector"></span>
                         <ul style="font-size: 15px">
-                            <li><a href="#">My profile</a></li>
+                            <li><a href="{% url 'profile'%}">My profile</a></li>
                             <li><a href="/accounts/password/change">Change password</a></li>
                             <li><a href="#">Logout</a></li>
                         </ul>
@@ -51,9 +51,9 @@
                     <li class="more dropdown" id="hov"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
                         <span class="selector"></span>
                         <ul>
-                            <li><a href="">search by username</a></li>
+                            <li><a href="#">search by username</a></li>
                             <li class="search clearfix">
-                                <form action="#" method="POST" enctype="multipart/form-data">
+                                <form action="{% url 'search_results' %}" method="POST" enctype="multipart/form-data">
                                     {% csrf_token%}
                                     <input class="btn btn-outline-warning btn-rounded  " type="text" name="search"
                                         placeholder="Search" />

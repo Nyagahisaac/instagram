@@ -17,13 +17,14 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls import url,include
 from django.contrib.auth import views
-from instagram.views import home,register,logout_view
+from instagram.views import home,register,logout_view,Signup
 
 import instagram
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     path('', include('instagram.urls')),
+    path('signup/', Signup, name='signup'),
     path('accounts/',include('registration.backends.simple.urls')),
     path('accounts/login/account/register/',register,name = 'register'),
     path('accounts/login/account/register/register/',register,name = 'register'),

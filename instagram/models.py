@@ -43,7 +43,7 @@ class Image(models.Model):
     caption = models.TextField(max_length=255)
     # profiles = models.ForeignKey(Profile, on_delete=models.CASCADE) 
     user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='posted_by',blank= True)
-    likes = models.ForeignKey(User, related_name='liked_by',on_delete=models.CASCADE, blank=True)
+    likes = models.IntegerField()
     post_date = models.DateTimeField(auto_now_add=True)
 
     def save_image(self):
