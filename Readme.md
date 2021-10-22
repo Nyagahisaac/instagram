@@ -4,14 +4,14 @@
 
 ## AUTHOR
 * By: Nyagah Isaac 
-* [live link]()
+
 
 ## Description
 
 * This web-app allows a user to create a Profile, add Post and allow users add comment that are all under his username allowing other users to vote for them.
 ## Setup/Installation Requirements
 
-    Live site can be accessed from the following link[]
+    Live site can be accessed from the following [link](https://izoohinstagram.herokuapp.com/)
    
 ## The App
  <img src="img/Screenshot.png" alt="">
@@ -30,7 +30,7 @@
 ## Cloning
 * In your terminal:
 
-  * $ git clone (https://github.com/Nyagahisaac/instagram.git.)
+  * $ [git clone](https://github.com/Nyagahisaac/instagram.git.)
   * $ cd Instagram
 
 ## Running the Application

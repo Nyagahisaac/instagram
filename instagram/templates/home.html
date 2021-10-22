@@ -69,7 +69,15 @@
               <div class="info">
                 <div class="user">
                   <div class="profile-pic"><img src="{{img.image.url}}" alt=""></div>
-                  <p class="username">{{img.name}}</p>
+                  {% if user.is_authenticated and user != profile.user %}
+                  {% if follow_status == True %}
+                  
+                  <p class="username">{{img.name}}<a style="font-size: 10px;" href="">.follow</a></p> 
+                  {% else %}
+                  <a style="font-size: 10px;" href="{% url 'follow' profile.user 0 %}">.unfollow</a>
+                  {% endif %}
+                  {% endif %}
+                  
                 </div>
 
               </div>
@@ -77,8 +85,8 @@
               <img style="width: 700px; "  src="{{img.image.url}}"  class="post-image" alt="">
               <div class="post-content">
                 <div class="reaction-wrapper">
-                  <span class="icons" style="padding-right: 25px;"> <a href="#"> <i
-                        class="far fa-heart"></i></i></a></span>
+                  <span class="icons" style="padding-right: 25px;"> <a href="{{img.likes}}"> <i
+                        class="far fa-heart btn btn-outline-danger "></i></i></a></span>
                   <span class="icons" style="padding-right: 25px;">{{img.image.comment}} <a href=""> <i
                         class="far fa-comment"></i></a></span>
                   <i class="far fa-paper-plane"></i>

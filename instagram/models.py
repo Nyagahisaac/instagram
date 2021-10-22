@@ -13,6 +13,7 @@ class Users(models.Model):
     email = models.EmailField()
     password = models.CharField(max_length=20,blank= True)
 
+
 class Profile(models.Model):
     photo = models.ImageField(upload_to='Profile/')
     boi = models.CharField(max_length=300, blank = True),
@@ -116,3 +117,44 @@ class Like(models.Model):
 
     def __str__(self):
         return str(self.like)
+
+
+class Follow(models.Model):
+    '''
+    this is a model class that defines the follow model
+    '''
+    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='follower')
+    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
+
+
+
+    def user_follow(sender, instance, *args, **kwargs):
+        follow = instance
+        sender = follow.follower
+        following = follow.following
+
+       
+
+    def user_unfollow(sender, instance, *args, **kwargs):
+        follow = instance
+        sender = follow.follower
+        following = follow.following
+
+class Stream(models.Model):
+    '''
+    this is a model class that defines the stream model
+    '''
+    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='stream_following')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, null=True)
+    date = models.DateTimeField()
+
+    def add_post(sender, instance, *args, **kwargs):
+        post = instance
+        user = post.user
+        followers = Follow.objects.all().filter(following=user)
+        for follower in followers:
+            stream = Stream(post=post, user=follower.follower, date=post.posted, following=user)
+            stream.save()
+
+        

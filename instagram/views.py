@@ -1,14 +1,16 @@
 from django.http.response import HttpResponse
-from django.shortcuts import  render ,redirect, get_object_or_404
+from django.shortcuts import  render ,redirect, get_object_or_404,HttpResponseRedirect
 import datetime as dt
 from .models import Profile,Image,User
 from django.contrib.auth import get_user_model,login,logout
 from django.contrib.auth.decorators import login_required
-from .models import Image,Profile,Comment
+from .models import Image,Profile,Comment,Follow,Stream
 from .forms import NewImageForm, NewCommentForm, NewProfileForm, SignupForm 
 from django.contrib import messages
 from .emails import send_register_welcome_email
 from django.contrib.auth.models import User
+from django.urls.base import reverse
+from django.db import transaction
 
 # Create your views here.
 User = get_user_model
@@ -141,3 +143,25 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
+
+@login_required
+def follow(request, username, option):
+    following = get_object_or_404(User, username=username)
+
+    try:
+        f, created = Follow.objects.get_or_create(follower=request.user, following=following)
+
+        if int(option) == 0:
+            f.delete()
+            Stream.objects.filter(following=following, user=request.user).all().delete()
+        else:
+             posts = Image.objects.all().filter(user=following)[:25]
+
+             with transaction.atomic():
+                for post in posts:
+                    stream = Stream(post=post, user=request.user, date=post.posted, following=following)
+                    stream.save()
+
+        return HttpResponseRedirect(reverse('profile', args=[username]))
+    except User.DoesNotExist:
+        return HttpResponseRedirect(reverse('profile', args=[username]))

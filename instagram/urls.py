@@ -12,6 +12,7 @@ urlpatterns=[
     url(r'^new/comment$', views.new_comment, name='new_comment'),
     url(r'^profile/user$', views.profile, name='profile'),
     path('search/', search_results, name='search_results')
+    
 
     
 ]

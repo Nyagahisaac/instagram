@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls import url,include
 from django.contrib.auth import views
-from instagram.views import home,register,logout_view,Signup
+from instagram.views import follow, home,register,logout_view,Signup,Follow
 
 import instagram
 
@@ -28,6 +28,7 @@ urlpatterns = [
     path('accounts/',include('registration.backends.simple.urls')),
     path('accounts/login/account/register/',register,name = 'register'),
     path('accounts/login/account/register/register/',register,name = 'register'),
-    url(r'tinymce/', include('tinymce.urls')),
+    path('<username>/follow/<option>', follow, name='follow'),
+    path('tinymce/', include('tinymce.urls')),
     # url(r'^logout/$', views.logout_view, {"next_page": '/'}), 
 ]
