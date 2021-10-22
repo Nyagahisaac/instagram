@@ -18,8 +18,6 @@
  <img src="img/Screenshot 2.png" alt="">
 
 
-
-
 ## Prerequisites
 
     python3.8
