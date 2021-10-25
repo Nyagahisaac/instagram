@@ -69,14 +69,13 @@
               <div class="info">
                 <div class="user">
                   <div class="profile-pic"><img src="{{img.image.url}}" alt=""></div>
-                  {% if user.is_authenticated and user != profile.user %}
-                  {% if follow_status == True %}
-                  
+                  {% if user.is_authenticated and user != img.user %} 
+                  {% if user.follow == True %}
                   <p class="username">{{img.name}}<a style="font-size: 10px;" href="">.follow</a></p> 
-                  {% else %}
-                  <a style="font-size: 10px;" href="{% url 'follow' profile.user 0 %}">.unfollow</a>
-                  {% endif %}
-                  {% endif %}
+                  
+                
+                   {% endif %}
+                  {% endif %} --
                   
                 </div>
 

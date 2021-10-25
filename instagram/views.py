@@ -145,8 +145,8 @@ def search_results(request):
         return render(request, 'search.html',{"message":message})
 
 @login_required
-def follow(request, username, option):
-    following = get_object_or_404(User, username=username)
+def follow(request, option):
+    following = get_object_or_404(User,)
 
     try:
         f, created = Follow.objects.get_or_create(follower=request.user, following=following)
@@ -162,6 +162,6 @@ def follow(request, username, option):
                     stream = Stream(post=post, user=request.user, date=post.posted, following=following)
                     stream.save()
 
-        return HttpResponseRedirect(reverse('profile', args=[username]))
+        return HttpResponseRedirect(reverse('profile', args=[User]))
     except User.DoesNotExist:
-        return HttpResponseRedirect(reverse('profile', args=[username]))
+        return HttpResponseRedirect(reverse('profile', args=[User]))

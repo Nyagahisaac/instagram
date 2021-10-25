@@ -63,6 +63,7 @@ This project was generated with :~
 ## Known Bugs
 ### Support and contact details
 
+Follow and following is on development working on it
  Incase of a problem, issue or need more clarification, feel free to send an email : [ nyagahisaac@gmail.com ]
 ## About
 
